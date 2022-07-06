@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TO DO zap</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 </head>
 
 
@@ -67,7 +69,8 @@
         .contanerPrincipal{ 
             display: flex;
             flex-wrap:wrap;
-            width: 80%;  
+        max-width: 1000px;
+       
            
             padding: 20px;
             justify-content: center;
@@ -76,7 +79,7 @@
         }
 
         #celular{
-            width: 500px;
+            width: 40%;
             margin-right: 20px;
             border-radius: 5px;
             border: 1px solid rgb(174, 175, 179);
@@ -108,6 +111,7 @@
              border: none;
             outline: none;
             resize: none;
+            user-select: none;
                       
         }
 
@@ -154,7 +158,7 @@
         }
 
               #mens3{
-                border: 1px solid white;
+                border: 1px solid #434444;
               }
 
         #ajuda{
@@ -164,16 +168,57 @@
             position: fixed;
         }
 
-        .ajudaapp{
+        #ajudaapp{
             position: absolute;
-            width: 30%;
+            position: fixed;
+            width: 400px;
             background-color: white;
-            border:1px solid #434444;
+            border:1px solid   #008069;
             border-radius: 5px;
-            bottom: 25px;
+            bottom: 60px;
             left: 50px;
-          
+            font-size: 13px;
+            padding: 10px; 
+            display: none; 
+         
+           
             
+        }
+
+        #alerta1{
+            position:fixed;
+            width: 150px;
+            height: 20px;
+            background-color: #434444;
+            text-align: center;
+            right: 0px;
+            top: 50%;
+            color: aquamarine;
+            border-radius: 4px;
+            opacity: 0;  
+                 
+        }
+
+        #ajuda:hover{
+            cursor: pointer;
+
+        }
+
+        #fecharx{
+            position: absolute;
+             color:    #008069;
+             font-size: 20px;
+             font-weight: 500;   
+             top: 5px;   
+             right: 10px;
+             
+           
+
+        }
+
+        #fecharx:hover{
+            cursor: pointer;
+
         }
 
 
@@ -192,15 +237,15 @@
 <div class="contanerCelular">
     <input type="text" id="celular" placeholder="Digite o Numero com DDD" title="Converse sem salvar o contato">
     <button onclick="enviarmensagem()" title="Converse sem salvar o contato" id="btnchat" class="btnverde">Abrir Chat</button > 
-        <button onclick="complink()" title="Criar um link do contato" id="btn1">Compartilhar Link</button >    
+        <button onclick="compartilhalink()" title="Criar um link do contato" id="btn1">Compartilhar Link</button >    
 </div>
 
-    <h3>Ações Rapidas para WhatsApp</h3>
+    <h3>Ações Rápidas para WhatsApp</h3>
 
   <div class="contanerPrincipal">
      <div class="divform" id="div1" title="Copie ou envie a mensagem para o WhatsApp">    
      <label > <img class="icones" src="imagens/icone-pix.svg" alt="">Pix</label><br>   
-    <textarea name="" id="pix" cols="30" rows="10"></textarea><br>
+    <textarea name="" readonly id="pix" cols="30" rows="10"></textarea><br>
     <button id="copybutton1" >Copiar</button>
     <button id="btnenviar1" onclick="copyEnviar()" class="btnverde" >Enviar Mensagem</button>
     </div>
@@ -208,7 +253,7 @@
 
 <div class="divform" id="div2" title="Copie ou envie a mensagem para o WhatsApp">
         <label > <img class="icones" src="imagens/endereco.png" alt="">Dados/Endereço</label><br>   
-       <textarea name="" id="endereco" cols="30" rows="10"></textarea><br>
+       <textarea name="" readonly id="endereco" cols="30" rows="10"></textarea><br>
        <button id="copybutton2" >Copiar</button>
        <button id="btnenviar2" onclick="copyEnviar2()" class="btnverde" >Enviar Mensagem</button>
     </div>
@@ -216,14 +261,14 @@
 
 <div class="divform" id="div3" title="Copie ou envie a mensagem para o WhatsApp">
     <label > <img class="icones" src="imagens/instagram.png" alt="">Instagram</label><br>   
-   <textarea name="" id="instagram" cols="30" rows="10"></textarea><br>
+   <textarea name="" readonly id="instagram" cols="30" rows="10"></textarea><br>
    <button id="copybutton3" >Copiar</button>
    <button id="btnenviar3" onclick="copyEnviar3()" class="btnverde"  >Enviar Mensagem</button>
 </div>
 
 <div class="divform" id="div4" title="Copie ou envie a mensagem para o WhatsApp">
     <label > <img class="icones" src="imagens/link-externo.png" alt="">Site</label><br>   
-   <textarea name="" id="site" cols="30" rows="10"></textarea><br>
+   <textarea name="" readonly id="site" cols="30" rows="10"></textarea><br>
    <button id="copybutton4" >Copiar</button>
    <button id="btnenviar4" onclick="copyEnviar4()" class="btnverde"  >Enviar Mensagem</button>
 </div>
@@ -231,7 +276,7 @@
 
 <div class="divform" id="div5" title="Copie ou envie a mensagem para o WhatsApp">
     <label > <img class="icones" src="imagens/pranchetas.png" alt="">Cardapio/Tabela Preços</label><br>   
-   <textarea name="" id="cardapio" cols="30" rows="10"></textarea><br>
+   <textarea name="" readonly id="cardapio" cols="30" rows="10"></textarea><br>
    <button id="copybutton5"  >Copiar</button>
    <button id="btnenviar5" onclick="copyEnviar5()" class="btnverde"  >Enviar Mensagem</button>
 </div>
@@ -239,14 +284,14 @@
 
 <div class="divform" id="div6" title="Copie ou envie a mensagem para o WhatsApp">
     <label > <img class="icones" src="imagens/pranchetas.png" alt="">Mensagem 1</label><br>   
-   <textarea name="" id="mens1" cols="30" rows="10"></textarea><br>
+   <textarea name="" readonly id="mens1" cols="30" rows="10"></textarea><br>
    <button id="copybutton6" >Copiar</button>
    <button id="btnenviar6" onclick="copyEnviar6()" class="btnverde"  >Enviar Mensagem</button>
 </div>
 
 <div class="divform" id="div7" title="Copie ou envie a mensagem para o WhatsApp">
     <label > <img class="icones" src="imagens/pranchetas.png" alt="">Mensagem 2</label><br>   
-   <textarea name="" id="mens2" cols="30" rows="10"></textarea><br>
+   <textarea name="" readonly id="mens2" cols="30" rows="10"></textarea><br>
    <button id="copybutton7">Copiar</button>
    <button id="btnenviar7" onclick="copyEnviar7()" class="btnverde"  >Enviar Mensagem</button>
 </div>
@@ -262,13 +307,17 @@
 </div>
 
 
-<div class="ajudaapp">
-<p>Ajuda</p>
-<p>Ajuda</p>
-<p>Ajuda</p>
+<div id="ajudaapp">
+<h4>Como usar o To Do Zap</h4><br>
+<p>1 - Botão Abrir chat: Converse um com numero sem salvar na  agenda do seu telefone</p><br>
+<p>2 - Botão Compartilharr link: Transforme qualquer  numero do WhatsApp em um link e compartilhe exp: https://wa.me/Seu numero</p><br>
+<p>3 - Ações Rápidas: Copie e cole facilmente os conteúdos mais usados no dia a  dia  do atendimento ou envie a  mensagem direto para o cliente</p><br>
+<p id="ajudafaleconosco">Para mais dúvidas ou contato fale conosco <a href="https://wa.me/5588988231760">WhatsApp</a></p>
+<p id="fecharx" onclick="fecharjuda()">X</p>
 </div>
+<img src="imagens/ajuda.png" alt="Como usar o app" id="ajuda" onclick="mostrarajuda()" title="Ajuda: como usar o app">
 
-<img src="imagens/ajuda.png" alt="Como usar o app" id="ajuda" title="Ajuda: como usar o app">
+<div id="alerta1">Copiado!</div>
     
 </body>
 </html>
@@ -386,14 +435,14 @@ window.open("https://wa.me/?text="+ mensagemPix +"","_blank");
 
 const textInput =  document.querySelector("#pix");  
 const copyButton1 = document.getElementById('copybutton1');
+const teste = document.getElementById("#div1");
 
 
     copyButton1.addEventListener('click', ()=>{
       textInput.select();       
       document.execCommand('copy');
-      alert("Copiado!");
-     
-       
+      document.getElementById('alerta1').style = 'opacity: 1';
+            
     });
 
 // FIM 
@@ -418,7 +467,7 @@ const copyButton2 = document.getElementById('copybutton2');
     copyButton2.addEventListener('click', ()=> {
       textInput2.select();       
       document.execCommand('copy');
-      alert("Copiado!");
+      document.getElementById('alerta1').style = 'opacity: 1';
      
        
     });
@@ -445,7 +494,7 @@ const copyButton3 = document.getElementById('copybutton3');
     copyButton3.addEventListener('click', ()=> {
       textInput3.select();       
       document.execCommand('copy');
-      alert("Copiado!");
+      document.getElementById('alerta1').style = 'opacity: 1';
      
        
     });
@@ -470,7 +519,7 @@ const copyButton4 = document.getElementById('copybutton4');
     copyButton4.addEventListener('click', ()=> {
       textInput4.select();       
       document.execCommand('copy');
-      alert("Copiado!");
+      document.getElementById('alerta1').style = 'opacity: 1';
      
        
     });
@@ -495,7 +544,7 @@ const copyButton5 = document.getElementById('copybutton5');
     copyButton5.addEventListener('click', ()=> {
       textInput5.select();       
       document.execCommand('copy');
-      alert("Copiado!");
+      document.getElementById('alerta1').style = 'opacity: 1';
      
        
     });
@@ -522,7 +571,7 @@ const copyButton6 = document.getElementById('copybutton6');
     copyButton6.addEventListener('click', ()=> {
       textInput6.select();       
       document.execCommand('copy');
-      alert("Copiado!");
+      document.getElementById('alerta1').style = 'opacity: 1';
      
        
     });
@@ -548,7 +597,7 @@ const copyButton7 = document.getElementById('copybutton7');
     copyButton7.addEventListener('click', ()=> {
       textInput7.select();       
       document.execCommand('copy');
-      alert("Copiado!");
+      document.getElementById('alerta1').style = 'opacity: 1';
      
        
     });
@@ -574,16 +623,59 @@ const copyButton8 = document.getElementById('copybutton8');
     copyButton8.addEventListener('click', ()=> {
       textInput8.select();       
       document.execCommand('copy');
-      alert("Copiado!");
+      document.getElementById('alerta1').style = 'opacity: 1';
      
        
     });
 
 // FIM 
 
+// some  com a div  alerta 
+
+setInterval(function() {
+$('#alerta1').fadeOut('fast');
+}, 3000);
 
 
+function compartilhalink(){
+   var ncelular =  document.querySelector("#celular").value; //pegar o valor  do inpute 
+    ncelular = ncelular.replace(/\D/g,''); //Deixar apenas números
+    var ddd = "55";    
+    
+//Verificar se tem DDI e adicionar se não tiver
 
+   if(ncelular.length < 13){
+       ncelular = ddd + ncelular; 
+       
+   } 
+
+// verifica se o numero ta  completo com o DDD
+   if(ncelular.length < 13){
+       alert("Verificar Número!");
+       document.getElementById("celular").focus();
+       return;
+       } 
+
+    var link2 = "https://wa.me/"; 
+    link2 = link2 + ncelular
+   
+    window.open("https://wa.me/?text="+ link2 +"","_blank");
+    document.querySelector("#celular").value ="";
+    
+}
+
+function mostrarajuda(){
+    
+    document.getElementById('ajudaapp').style.display = 'block';
+ 
+    }
+
+    function fecharjuda(){
+    
+    document.getElementById('ajudaapp').style.display = 'none';
+ 
+    }
 
 
 </script>
+
