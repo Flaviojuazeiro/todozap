@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TO DO zap</title>
+    <link rel="shortcut icon" href="imagens/icone-whatsapp.png" type="image/x-icon">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -112,6 +113,8 @@
             outline: none;
             resize: none;
             user-select: none;
+            font-family: arial, sans-serif;
+
                       
         }
 
@@ -142,14 +145,27 @@
         #div8{
         background-color: rgb(208, 243, 120);}
 
+        #div1:hover, #div2:hover, #div3:hover, #div4:hover, #div5:hover , #div6:hover, #div7:hover, #div8:hover{
+         opacity: 90%;
+         box-shadow: 5px 5px 5px rgba(179, 181, 182, 0.726);
+
+     
+           
+
+        } 
+
 
         button{
-            padding: 5px;
+            padding: 7px;
             font-size: 12px;
             border: none;
             border-radius: 5px;
             background-color: #434444;
             color: white;
+              }
+
+              button:hover{
+                cursor: pointer;
               }
 
              .btnverde{
@@ -162,7 +178,7 @@
               }
 
         #ajuda{
-            width: 50px;
+            width: 60px;
             bottom: 20px;
             left: 20px;
             position: fixed;
@@ -171,18 +187,18 @@
         #ajudaapp{
             position: absolute;
             position: fixed;
-            width: 400px;
+            width: 40%;
             background-color: white;
             border:1px solid   #008069;
             border-radius: 5px;
-            bottom: 60px;
+            bottom: 65px;
             left: 50px;
             font-size: 13px;
             padding: 10px; 
             display: none; 
-         
+            font-family: arial, sans-serif;
+            font-style: normal; 
            
-            
         }
 
         #alerta1{
@@ -222,6 +238,82 @@
         }
 
 
+        /*CONFIGURAÇÃO PARA  CELULAR*/
+@media screen and (max-width:450px) {
+    .divform{       
+            width: 100%;                    
+        }
+    
+        #ajudaapp{            
+            width: 70%;           
+        }
+
+        .contanerCelular{            
+            display:block;
+            justify-items: center;
+            align-items: center;
+            text-align: center;
+            
+             
+                     
+        }
+
+        
+        #celular{
+            width: 90%;
+            margin: 0px;
+          
+            
+        }
+
+        input#celular{
+           margin: 10px;
+           height: 25px;
+           margin-top: 0;
+          
+            
+        }
+
+     #contaner-botao-principal{
+       justify-items: center;
+       margin: auto;
+     }
+
+     #celular{
+            width: 90%;
+            margin: 0px;
+          
+        }
+
+        button#btnchat{
+            width: 160px;
+            height: 35px;
+           
+        }
+
+        
+        button#btn1{
+            width: 160px;
+            height: 35px;          
+            
+        }
+
+        #ajuda{
+            bottom: 0px;
+            left: 85%;
+          
+        }   
+        textarea{
+            width: 100%;
+
+                      
+        }
+
+    
+    }
+
+
+
     </style>
 
 
@@ -235,9 +327,12 @@
 <P id="menspadrao">Padrão</P>
 
 <div class="contanerCelular">
-    <input type="text" id="celular" placeholder="Digite o Numero com DDD" title="Converse sem salvar o contato">
+    <input type="text"  name="telefone"  maxlength="15" id="celular" placeholder="Digite o Numero com DDD" title="Converse sem salvar o contato">
+    <div id="contaner-botao-principal">
     <button onclick="enviarmensagem()" title="Converse sem salvar o contato" id="btnchat" class="btnverde">Abrir Chat</button > 
-        <button onclick="compartilhalink()" title="Criar um link do contato" id="btn1">Compartilhar Link</button >    
+    <button onclick="compartilhalink()" title="Criar um link do contato" id="btn1">Compartilhar Link</button >    
+    </div>
+
 </div>
 
     <h3>Ações Rápidas para WhatsApp</h3>
@@ -338,7 +433,7 @@ const greetingMessage = () => {
 
 
 
-    var mensagempadrao = "Ola, "+"\n"+(greetingMessage());
+    var mensagempadrao = "Ola, "+"\n"+(greetingMessage()) +"\n" + "Artdez";
     var pix = "PIX CHAVE CPF = 65360788372\nCICERA GIRLEY PAIVA GOMES"; 
     var endereco = "Artdez corte a laser\nRua São Paulo, 1018-Centro\nProx a GIGI tecidos\nJuazeiro do Norte-CE ";
 
@@ -675,6 +770,36 @@ function mostrarajuda(){
     document.getElementById('ajudaapp').style.display = 'none';
  
     }
+
+// Máscaras telefone fixo e  celular 
+
+function mascara(o,f){
+    v_obj=o
+    v_fun=f
+    setTimeout("execmascara()",1)
+}
+function execmascara(){
+    v_obj.value=v_fun(v_obj.value)
+}
+function mtel(v){
+    v=v.replace(/\D/g,""); //Remove tudo o que não é dígito
+    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+    v=v.replace(/(\d)(\d{4})$/,"$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
+    return v;
+}
+function id( el ){
+	return document.getElementById( el );
+}
+window.onload = function(){
+	id('celular').onkeyup = function(){
+		mascara( this, mtel );
+	}
+}
+
+// fim 
+
+
+
 
 
 </script>
